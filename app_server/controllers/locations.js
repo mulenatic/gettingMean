@@ -82,4 +82,4 @@ module.exports.homelist = function(req, res) {
         }]
 
     });
-}
+};

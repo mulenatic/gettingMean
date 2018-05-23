@@ -32,14 +32,14 @@ block content
                   span.glyphicon.glyphicon-ok
                   | &nbsp;#{facility}
                 | &nbsp;
-       .col-xs-12.col-sm-6.location-map
+        .col-xs-12.col-sm-6.location-map
           .panel.panel-primary
             .panel-heading
               h2.panel-title Location map
             .panel-body
               img.img-responsive.img-rounded(src='http://maps.googleapis.com/maps/api/staticmap?center=#{location.coords.lat},#{location.coords.lng}&zoom=17&size=400x350&sensor=false&markers=#{locations.coords.lag},#{locations.coords.lng}&scale=2')
       .row
-        col-xs-12
+        .col-xs-12
           .panel.panel-primary.review-panel
             .panel-heading
               a.btn.btn-default.pull-right(href='/location/review/new/') Add review
