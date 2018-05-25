@@ -8,7 +8,7 @@ module.exports.homelist = function(req, res) {
 /* GET Location info page */
 module.exports.locationInfo = function(req, res) {
     res.render('location-info', { 
-    title: 'Starbups:',
+    title: 'Starcups:',
     pageHeader: { title: 'Starcups' },
     sidebar: {
             context: 'is on Loc8r beacause it has accessible wifi and space to sit down with your laptop and get some work done.',
@@ -44,8 +44,8 @@ module.exports.locationInfo = function(req, res) {
         timestamp: '16 June 2013',
         reviewText: 'Okay.'
       }]
-     }         
-   });
+     }
+  });
 };
 
 /* GET add review page */
