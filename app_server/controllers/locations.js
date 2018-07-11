@@ -86,8 +86,25 @@ module.exports.homelist = function(req, res) {
     request(
 	requestOptions,
 	function(err, response, body) {
-	    console.log(body);
-	    renderHomepage(req, res, body);
+	    var i, data;
+	    data = body;
+	    for (i = 0; i < data.length; i++) {
+		data[i].distance = _formatDistance(data[i].distance);
+	    }
+	    renderHomepage(req, res, data);
 	}
     );
 };
+
+var _formatDistance = function(distance) {
+
+    var numDistance, unit;
+    if (distance >= 1000 ) {
+	numDistance = parseInt(distance / 1000, 10)
+	unit = 'km';
+    } else {
+	numDistance = parseFloat(distance).toFixed(1);;
+	unit = 'm';
+    }
+    return numDistance + unit;
+}

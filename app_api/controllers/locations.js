@@ -45,7 +45,8 @@ module.exports.locationsListByDistance = function(req, res) {
 	    '$geoNear': {
 		'near' : point,
 		'spherical': true,
-		'distanceField': 'dist.calculated'
+		'distanceField': 'dist.calculated',
+		'maxDistance': 20000
 	    }
 	}],
 	 function(err, results) {
