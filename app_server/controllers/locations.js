@@ -9,6 +9,10 @@ if (process.env.NODE_ENV === 'production') {
 
 /* GET Location info page */
 module.exports.locationInfo = function(req, res) {
+    renderDetailPage(req, res);
+}
+
+var renderDetailPage = function(req,res) {
     res.render('location-info', { 
 	title: 'Starcups:',
 	pageHeader: { title: 'Starcups' },
