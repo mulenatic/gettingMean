@@ -11,7 +11,49 @@ module.exports.reviewCreate = function(req, res) {
 };
 
 module.exports.reviewsReadOne = function(req, res) {
-    sendJsonResponse(res, 200, {"status": "success"});
+    if (req.params && req.params.locationid && req.params.reviewid) {
+	Loc
+	    .findById(req.params.locationid)
+	    .select('name reviews')
+	    .exec(function(err, location) {
+		var response, review;
+		if (!location) {
+		    sendJsonResponse(res, 404, {
+			"message": "location for locationid not found"
+		    });
+		    return;
+		} else if (err) {
+		    sendJsonResponse(res, 404, err);
+		    return;
+		}
+		if (location.reviews && locations.reviews.length > 0 ) {
+		    review = location.reviews.id(req.params.reviewid);
+		    if (!review) {
+			sendJsonResponse(res, 404, {
+			    "message": "reviewid not found"
+			});
+		    } else {
+			resonse = {
+			    location : {
+				name : location.name,
+				id : req.params.locationid
+			    },
+			    review : review
+			},
+			sendJsonResponse(res, 200, response);
+		    }
+		} else {
+		    sendJsonResponse(res, 404, {
+			"message" : "No reviews found"
+		    });
+		}
+		    
+	    });
+    } else {
+	sendJsonResponse(res, 404, {
+	    "message" : "No locationid in request"
+	});
+    }
 };
 
 module.exports.reviewsUpdateOne = function(req, res) {
