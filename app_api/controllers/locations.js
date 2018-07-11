@@ -33,12 +33,6 @@ module.exports.locationsListByDistance = function(req, res) {
 	coordinates: [lng, lat]
     };
 
-    var geoOptions = {
-	spherical: true,
-	maxDistance: theEarth.getRadeFromDistance(20),
-	num: 10
-    };
-
     if (!lng || !lat) {
 	sendJsonResponse(res, 404, {
 	    "message": "lng and lat query parameters are required"
@@ -46,7 +40,15 @@ module.exports.locationsListByDistance = function(req, res) {
 	return;
     }
 
-    Loc.geoNear(point, geoOptions, function(err, results, stats) {
+    Loc.aggregate(
+	[{
+	    '$geoNear': {
+		'near' : point,
+		'spherical': true,
+		'distanceField': 'dist.calculated'
+	    }
+	}],
+	 function(err, results) {
 
 	var locations = [];
 	if (err) {
@@ -54,12 +56,12 @@ module.exports.locationsListByDistance = function(req, res) {
 	} else {
 	    results.forEach(function(doc) {
 		locations.push({
-		    distance: theEarth.getDistanceFromRads(doc.dis),
-		    name: doc.obj.name,
-		    address: doc.obj.address,
-		    rating: doc.obj.rating,
-		    facilities: doc.obj.facilities,
-		    _id: doc.obj._id
+		    distance: doc.dist.calculated,
+		    name: doc.name,
+		    address: doc.address,
+		    rating: doc.rating,
+		    facilities: doc.facilities,
+		    _id: doc._id
 		});
 	    })
 	    sendJsonResponse(res, 200, locations);
