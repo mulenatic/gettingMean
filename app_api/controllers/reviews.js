@@ -23,7 +23,7 @@ var doAddReview = function(req, res, location) {
 		sendJsonResponse(res, 400, err);
 	    } else {
 		updateAverageRating(location._id);
-		thisReview = location.reviews(location.reviews.length - 1);
+		thisReview = location.reviews[location.reviews.length - 1];
 		sendJsonResponse(res, 201, thisReview);
 	    }
 	});
@@ -45,7 +45,7 @@ var updateAverageRating = function(locationid) {
 var doSetAverageRating = function(location) {
     var i, reviewCount, ratingAverage, ratingTotal;
     if(location.reviews && location.reviews.length > 0) {
-	reviewCount = loation.reviews.length;
+	reviewCount = location.reviews.length;
 	ratingTotal = 0;
 	for (i=0; i< reviewCount; i++) {
 	    ratingTotal = ratingTotal + location.reviews[i].rating;
