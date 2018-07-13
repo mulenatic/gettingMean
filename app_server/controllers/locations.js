@@ -158,17 +158,17 @@ module.exports.doAddReview = function(req, res) {
     };
     requestOptions = {
 	url: apiOptions.server + path,
-	mehtod: "POST",
+	method: "POST",
 	json: postdata
     };
     request(
 	requestOptions,
-	function(err, resonse, body) {
+	function(err, response, body) {
 	    if (response.statusCode === 201) {
 		res.redirect("/location/" + locationid );
 	    } else {
 		_showError(req, res, response.statusCode);
-	    }
+	    }9
 	}
     );
 };
