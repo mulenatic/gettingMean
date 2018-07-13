@@ -9,48 +9,35 @@ if (process.env.NODE_ENV === 'production') {
 
 /* GET Location info page */
 module.exports.locationInfo = function(req, res) {
-    renderDetailPage(req, res);
+    var requestOptions, path;
+    path = "/api/locations/" + req.params.locationid;
+    requestOptions = {
+	url: apiOptions.server + path,
+	method: "GET",
+	json: {}
+    };
+    request(
+	requestOptions,
+	function(err, response, body) {
+	    var data = body;
+	    data.coords = {
+		lng : body.coords[0],
+		lat : body.coords[1]
+	    };
+	    renderDetailPage(req, res, data);
+	}
+    );
 }
 
-var renderDetailPage = function(req,res) {
+var renderDetailPage = function(req,res, locDetail) {
     res.render('location-info', { 
-	title: 'Starcups:',
-	pageHeader: { title: 'Starcups' },
+	title: locDetail.name,
+	pageHeader: { title: locDetail.name },
 	sidebar: {
             context: 'is on Loc8r beacause it has accessible wifi and space to sit down with your laptop and get some work done.',
             callToAction: 'If you\'ve been and you like it - or you don\'t please leave a review to help other people just like you.'
         },
-	location: {
-	    name: 'Starcups',
-	    rating: 3,
-	    facilities: ['Hot drinks', 'Food', 'Premium wifi'],
-	    coords: { lat: 51.455041, lng: -0.9690884 },
-	    openingTimes: [{
-		days: 'Monday - Friday',
-		opening: '7:00am',
-		closing: '7:00pm',
-		closed: false
-	    }, {
-		days: 'Saturday',
-		opening: '8:00am',
-		closing: '5:00pm',
-		closed: false
-	    }, {
-		days: 'Sunday',
-		closed: true
-	    }],
-	    reviews: [{
-		author: 'Simon Holmes',
-		rating: 5,
-		timestamp: '16 July 2013',
-		reviewText: 'What a great place',
-	    }, {
-		author: 'Charlie Chaplin',
-		rating: 3,
-		timestamp: '16 June 2013',
-		reviewText: 'Okay.'
-	    }]
-	}
+	location: locDetail
     });
 };
 
