@@ -132,3 +132,6 @@ var _formatDistance = function(distance) {
     }
     return numDistance + unit;
 }
+
+module.exports.doAddReview = function(req, res) {
+};
