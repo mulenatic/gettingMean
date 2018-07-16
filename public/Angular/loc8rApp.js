@@ -43,7 +43,7 @@ var locationListCtrl = function($scope) {
 
 
 var _isNumeric = function(n) {
-    return !isNan(parseFloat(n)) && isFinite(n);
+    return !isNaN(parseFloat(n)) && isFinite(n);
 };
 
 var formatDistance = function() {
