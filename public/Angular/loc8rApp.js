@@ -5,14 +5,14 @@ var locationListCtrl = function($scope) {
 	locations: [{
 	    name: 'Burger Queen',
 	    address: 'Teststr. 1',
-	    rating: 3,
+	    rating: 1,
 	    facilities: ['Beer', 'Food' ],
 	    distance: '0.3042',
 	    _id: '23423rwdfasdfas23324fsfasdfa'
 	},{
 	    name: 'Burger Queen 2',
 	    address: 'Teststr. 2',
-	    rating: 3,
+	    rating: 2,
 	    facilities: ['Beer', 'Food' ],
 	    distance: '0.4042',
 	    _id: '23423rwdfasdfas23324fsfasdfb'
@@ -26,14 +26,14 @@ var locationListCtrl = function($scope) {
 	},{
 	    name: 'Burger Queen 4 ',
 	    address: 'Teststr. 4',
-	    rating: 3,
+	    rating: 4,
 	    facilities: ['Beer', 'Food' ],
 	    distance: '0.1042',
 	    _id: '23423rwdfasdfas23324fsfasdfd'
 	},{
 	    name: 'Burger Queen 5',
 	    address: 'Teststr. 5',
-	    rating: 3,
+	    rating: 5,
 	    facilities: ['Beer', 'Food' ],
 	    distance: '0.0042',
 	    _id: '23423rwdfasdfas23324fsfasdfe'
@@ -69,7 +69,7 @@ var ratingStars = function() {
 	scope: {
 	    thisRating: '=rating'
 	},
-	template: "{{ thisRating }}"
+	templateUrl: '/Angular/rating-stars.html'
     };
 };
 
