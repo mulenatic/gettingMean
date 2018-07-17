@@ -1,15 +1,24 @@
 angular.module('loc8rApp', []);
 
 var loc8rData = function($http) {
-    return $http.get('/api/locations?lng=6.8131&lat=50.9168&maxDistance=20');
+    var locationByCoords = function(lat, lng) {
+	return $http.get('/api/locations?lng=" + lng + "&lat=" + lat + "&maxDistance=20');
+    };
+
+    return {
+	locationByCoords: locationByCoords
+    };
 }
 
 var locationListCtrl = function($scope, loc8rData, geolocation) {
     $scope.message = "Checking your location!";
 
     $scope.getData = function(position) {
+	var lat = position.coords.latitude,
+	    lng = position.coords.longitude;
 	$scope.message = "Searching for nearby places";
 	loc8rData
+	    .locationByCoords(lat, lng)
 	    .success(function(data) {
 		$scope.message = data.length > 0 ? "" : "No locations found";
 		$scope.data = { locations: data };
@@ -32,7 +41,8 @@ var locationListCtrl = function($scope, loc8rData, geolocation) {
 	});
     };
 
-    geolocation.getPosition($scope.getData, $scope.showError, $scope.noGeo);
+    getData({coords: { latitude: 50.9168, longitude: 6.8131 }};
+    //geolocation.getPosition($scope.getData, $scope.showError, $scope.noGeo);
     
 };
 
