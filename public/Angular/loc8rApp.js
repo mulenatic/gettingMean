@@ -6,10 +6,9 @@ var loc8rData = function($http) {
 
 var locationListCtrl = function($scope, loc8rData) {
     loc8rData
-	.then(function(data) {
-	    $scope.data = { locations: data };
-	})
-	.catch(function(e) {
+	.then(function(response) {
+	    $scope.data = { locations: response.data };
+	}, function(e) {
 	    consoloe.log(e);
 	});
 };
