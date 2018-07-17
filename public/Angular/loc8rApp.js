@@ -66,7 +66,10 @@ var formatDistance = function() {
 
 var ratingStars = function() {
     return {
-	template: "{{ location.rating }}"
+	scope: {
+	    thisRating: '=rating'
+	},
+	template: "{{ thisRating }}"
     };
 };
 
