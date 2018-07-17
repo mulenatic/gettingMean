@@ -5,10 +5,14 @@ var loc8rData = function($http) {
 }
 
 var locationListCtrl = function($scope, loc8rData) {
+    $scope.message = "Searching for nearby places";
     loc8rData
-	.then(function(response) {
-	    $scope.data = { locations: response.data };
-	}, function(e) {
+	.success(function(data) {
+	    $scope.message = data.length > 0 ? "" : "No locations found";
+	    $scope.data = { locations: data };
+	})
+	.error(function(e) {
+	    $scope.message = "Sorry, something's gone wrong";
 	    consoloe.log(e);
 	});
 };
