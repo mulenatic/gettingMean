@@ -64,7 +64,14 @@ var formatDistance = function() {
     };
 };
 
+var ratingStars = function() {
+    return {
+	template: "{{ location.rating }}"
+    };
+};
+
 angular
     .module('loc8rApp')
     .controller('locationListCtrl', locationListCtrl)
-    .filter('formatDistance', formatDistance);
+    .filter('formatDistance', formatDistance)
+    .directive('ratingStars', ratingStars);
