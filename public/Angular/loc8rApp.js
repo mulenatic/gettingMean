@@ -41,7 +41,7 @@ var locationListCtrl = function($scope, loc8rData, geolocation) {
 	});
     };
 
-    getData({coords: { latitude: 50.9168, longitude: 6.8131 }});
+    $scope.getData({coords: { latitude: 50.9168, longitude: 6.8131 }});
     //geolocation.getPosition($scope.getData, $scope.showError, $scope.noGeo);
     
 };
