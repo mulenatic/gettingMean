@@ -2,7 +2,7 @@ angular.module('loc8rApp', []);
 
 var loc8rData = function($http) {
     var locationByCoords = function(lat, lng) {
-	return $http.get('/api/locations?lng=" + lng + "&lat=" + lat + "&maxDistance=20');
+	return $http.get('/api/locations?lng=' + lng + '&lat=' + lat + '&maxDistance=20');
     };
 
     return {
@@ -41,7 +41,7 @@ var locationListCtrl = function($scope, loc8rData, geolocation) {
 	});
     };
 
-    $scope.getData({coords: { latitude: 50.9168, longitude: 6.8131 }});
+    $scope.getData({coords: { latitude: "50.9168", longitude: "6.8131" }});
     //geolocation.getPosition($scope.getData, $scope.showError, $scope.noGeo);
     
 };
